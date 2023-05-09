@@ -9,8 +9,8 @@ class SecuredLoanValidationHandler : LoanValidationHandler {
     override fun validate(request: LoanRequest): LoansData? {
         return with(request.customer) {
             approveWhen { incomeValue >= 5000.bd && age < 30 }
-                ?: approveWhen { incomeValue > 3000.bd && incomeValue < 5000.bd && location == "SP" }
-                ?: approveWhen { incomeValue <= 3000.bd && age < 30 && location == "SP" }
+                ?: approveWhen { incomeValue > 3000.bd && incomeValue < 5000.bd && location == LOCATION_REQUIREMENT }
+                ?: approveWhen { incomeValue <= 3000.bd && age < 30 && location == LOCATION_REQUIREMENT }
         }
     }
 
@@ -26,6 +26,8 @@ class SecuredLoanValidationHandler : LoanValidationHandler {
     }
 
     companion object {
+        private const val LOCATION_REQUIREMENT = "SP"
+
         private const val TYPE = "SECURED"
         private const val TAXES = 3
     }
